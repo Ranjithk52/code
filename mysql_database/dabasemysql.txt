@@ -1,0 +1,2056 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.17 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2019, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> CREATE TABLE Employee(
+    ->
+    -> EmpNo INT(3) PRIMARY KEY,
+    ->
+    -> EName VARCHAR(35) NOT NULL,
+    ->
+    -> jCode INT(3) REFERENCES job(jCode),
+    ->
+    -> MgrNo INT(3) REFERENCES Employee(EmpNo),
+    ->
+    -> HireDate DATE,
+    ->
+    -> Salary INT(10),
+    ->
+    -> Commission FLOAT(11,2),
+    ->
+    -> DeptNo INT(3) REFERENCES Department(DeptNo));
+ERROR 1046 (3D000): No database selected
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| exception          |
+| information_schema |
+| mysql              |
+| performance_schema |
+| restsampledatabase |
+| sakila             |
+| storage            |
+| sys                |
+| templete           |
+| templetedata       |
+| testing            |
+| trail              |
+| users              |
+| world              |
++--------------------+
+14 rows in set (0.18 sec)
+
+mysql> use storage;
+Database changed
+mysql> CREATE TABLE Employee(
+    ->
+    -> EmpNo INT(3) PRIMARY KEY,
+    ->
+    -> EName VARCHAR(35) NOT NULL,
+    ->
+    -> jCode INT(3) REFERENCES job(jCode),
+    ->
+    -> MgrNo INT(3) REFERENCES Employee(EmpNo),
+    ->
+    -> HireDate DATE,
+    ->
+    -> Salary INT(10),
+    ->
+    -> Commission FLOAT(11,2),
+    ->
+    -> DeptNo INT(3) REFERENCES Department(DeptNo));
+ERROR 1050 (42S01): Table 'employee' already exists
+mysql> show tables;
++-------------------+
+| Tables_in_storage |
++-------------------+
+| emp               |
+| employee          |
+| students          |
++-------------------+
+3 rows in set (0.09 sec)
+
+mysql> select * from employee;
+Empty set (0.03 sec)
+
+mysql> drop table employee;
+Query OK, 0 rows affected (0.76 sec)
+
+mysql> show tables;
++-------------------+
+| Tables_in_storage |
++-------------------+
+| emp               |
+| students          |
++-------------------+
+2 rows in set (0.00 sec)
+
+mysql> CREATE TABLE Employee(
+    ->
+    -> EmpNo INT(3) PRIMARY KEY,
+    ->
+    -> EName VARCHAR(35) NOT NULL,
+    ->
+    -> jCode INT(3) REFERENCES job(jCode),
+    ->
+    -> MgrNo INT(3) REFERENCES Employee(EmpNo),
+    ->
+    -> HireDate DATE,
+    ->
+    -> Salary INT(10),
+    ->
+    -> Commission FLOAT(11,2),
+    ->
+    -> DeptNo INT(3) REFERENCES Department(DeptNo));
+Query OK, 0 rows affected, 6 warnings (0.64 sec)
+
+mysql> show tables;
++-------------------+
+| Tables_in_storage |
++-------------------+
+| emp               |
+| employee          |
+| students          |
++-------------------+
+3 rows in set (0.00 sec)
+
+mysql> desc employee;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| EmpNo      | int(3)      | NO   | PRI | NULL    |       |
+| EName      | varchar(35) | NO   |     | NULL    |       |
+| jCode      | int(3)      | YES  |     | NULL    |       |
+| MgrNo      | int(3)      | YES  |     | NULL    |       |
+| HireDate   | date        | YES  |     | NULL    |       |
+| Salary     | int(10)     | YES  |     | NULL    |       |
+| Commission | float(11,2) | YES  |     | NULL    |       |
+| DeptNo     | int(3)      | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+8 rows in set (0.04 sec)
+
+mysql> Insert into employee values(1,’venkat’,672,NULL,’2006-02-01’,1200000,10000,40);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?venkat?,672,NULL,?2006-02-01?,1200000,10000,40)' at line 1
+mysql>
+mysql> Insert into employee values(2,’Nirmala’,671,1,’2007-04-02’,800000,50000,20);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?Nirmala?,671,1,?2007-04-02?,800000,50000,20)' at line 1
+mysql>
+mysql> Insert into employee values(3,’Pradeep’,669,1,’2005-10-10’,1000000,NULL,40);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?Pradeep?,669,1,?2005-10-10?,1000000,NULL,40)' at line 1
+mysql>
+mysql> Insert into employee values(4,’Srinivas’,669,1,’2005-05-08’,1000000,NULL,30);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?Srinivas?,669,1,?2005-05-08?,1000000,NULL,30)' at line 1
+mysql>
+mysql> Insert into employee values(5,’Krishna’,668,2,’2005-10-09’,500000,20000,22);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?Krishna?,668,2,?2005-10-09?,500000,20000,22)' at line 1
+mysql>
+mysql> Insert into employee values(6,’Deepa’,668,3,’2007-09-09’,600000,NULL,23);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?Deepa?,668,3,?2007-09-09?,600000,NULL,23)' at line 1
+mysql>
+mysql> Insert into employee values(7,'Keerthi',668,4,’2006-06-05’,600000,NULL,24);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?2006-06-05?,600000,NULL,24)' at line 1
+mysql> Insert into employee values(7,'Keerthi',668,4,'2006-06-05',600000,NULL,24);
+Query OK, 1 row affected (0.11 sec)
+
+mysql> select * from employee;
++-------+---------+-------+-------+------------+--------+------------+--------+
+| EmpNo | EName   | jCode | MgrNo | HireDate   | Salary | Commission | DeptNo |
++-------+---------+-------+-------+------------+--------+------------+--------+
+|     7 | Keerthi |   668 |     4 | 2006-06-05 | 600000 |       NULL |     24 |
++-------+---------+-------+-------+------------+--------+------------+--------+
+1 row in set (0.00 sec)
+
+mysql> delete from employee where empno=7;
+Query OK, 1 row affected (0.13 sec)
+
+mysql> select * from employee;
+Empty set (0.00 sec)
+
+mysql> Insert into employee values(1,'venkat',672,NULL,'2006-02-01',1200000,10000,40);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> Insert into employee values(2,'Nirmala',671,1,'2007-04-02',800000,50000,20);
+Query OK, 1 row affected (0.11 sec)
+
+mysql> Insert into employee values(3,'Pradeep',669,1,'2005-10-10',1000000,NULL,40);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> Insert into employee values(4,'Srinivas',669,1,'2005-05-08',1000000,NULL,30);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> Insert into employee values(5,'Krishna',668,2,'2005-10-09',500000,20000,22);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> Insert into employee values(6,'Deepa',668,3,'2007-09-09',600000,NULL,23);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> Insert into employee values(7,'Keerthi',668,4,'2006-06-05',600000,NULL,24);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> select * from employee;
++-------+----------+-------+-------+------------+---------+------------+--------+
+| EmpNo | EName    | jCode | MgrNo | HireDate   | Salary  | Commission | DeptNo |
++-------+----------+-------+-------+------------+---------+------------+--------+
+|     1 | venkat   |   672 |  NULL | 2006-02-01 | 1200000 |   10000.00 |     40 |
+|     2 | Nirmala  |   671 |     1 | 2007-04-02 |  800000 |   50000.00 |     20 |
+|     3 | Pradeep  |   669 |     1 | 2005-10-10 | 1000000 |       NULL |     40 |
+|     4 | Srinivas |   669 |     1 | 2005-05-08 | 1000000 |       NULL |     30 |
+|     5 | Krishna  |   668 |     2 | 2005-10-09 |  500000 |   20000.00 |     22 |
+|     6 | Deepa    |   668 |     3 | 2007-09-09 |  600000 |       NULL |     23 |
+|     7 | Keerthi  |   668 |     4 | 2006-06-05 |  600000 |       NULL |     24 |
++-------+----------+-------+-------+------------+---------+------------+--------+
+7 rows in set (0.00 sec)
+
+mysql> CREATE TABLE Department(
+    ->
+    -> DeptNo INT(3) PRIMARY KEY,
+    ->
+    -> DName VARCHAR(35),
+    ->
+    -> LCode INT(3) REFERENCES Location(lCode));
+Query OK, 0 rows affected, 2 warnings (0.42 sec)
+
+mysql> show tables;
++-------------------+
+| Tables_in_storage |
++-------------------+
+| department        |
+| emp               |
+| employee          |
+| students          |
++-------------------+
+4 rows in set (0.00 sec)
+
+mysql> Insert into department values(10,’Accounting’,122);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?Accounting?,122)' at line 1
+mysql>
+mysql> Insert into department values(20,’Research’,124);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?Research?,124)' at line 1
+mysql>
+mysql> Insert into department values(30,’Sales’,123);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?Sales?,123)' at line 1
+mysql>
+mysql> Insert into department values(40,’Operataions’,167);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?Operataions?,167)' at line 1
+mysql>
+mysql> Insert into department values(22,’Finance’,122);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?Finance?,122)' at line 1
+mysql>
+mysql> Insert into department values(23,’Sales’,122);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?Sales?,122)' at line 1
+mysql>
+mysql> Insert into department values(24,’HR’,122);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?HR?,122)' at line 1
+mysql> Insert into department values(10,'Accounting',122);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> Insert into department values(10,'Accounting',122);
+ERROR 1062 (23000): Duplicate entry '10' for key 'PRIMARY'
+mysql> Insert into department values(20,'Research',124);
+Query OK, 1 row affected (0.13 sec)
+
+mysql> Insert into department values(30,'Sales',123);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> Insert into department values(40,'Operataions',167);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> Insert into department values(22,'Finance',122);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> Insert into department values(23,'Sales',122);
+Query OK, 1 row affected (0.10 sec)
+
+mysql> Insert into department values(24,'HR',122);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> select * from department;
++--------+-------------+-------+
+| DeptNo | DName       | LCode |
++--------+-------------+-------+
+|     10 | Accounting  |   122 |
+|     20 | Research    |   124 |
+|     22 | Finance     |   122 |
+|     23 | Sales       |   122 |
+|     24 | HR          |   122 |
+|     30 | Sales       |   123 |
+|     40 | Operataions |   167 |
++--------+-------------+-------+
+7 rows in set (0.00 sec)
+
+mysql> CREATE TABLE Job(
+    ->
+    -> JCode INT(3) PRIMARY KEY,
+    ->
+    -> JName VARCHAR(35) NOT NULL);
+Query OK, 0 rows affected, 1 warning (0.39 sec)
+
+mysql> Insert into job values(666,’Clerk’);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?Clerk?)' at line 1
+mysql>
+mysql> Insert into job values(667,’Trainee’);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?Trainee?)' at line 1
+mysql>
+mysql> Insert into job values(668,’Analyst’);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?Analyst?)' at line 1
+mysql>
+mysql> Insert into job values(669,’SalesPerson’);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?SalesPerson?)' at line 1
+mysql>
+mysql> Insert into job values(670,’Manager’);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?Manager?)' at line 1
+mysql>
+mysql> Insert into job values(671,’President’);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?President?)' at line 1
+mysql> Insert into job values(666,'Clerk');
+Query OK, 1 row affected (0.09 sec)
+
+mysql> Insert into job values(667,'Trainee');
+Query OK, 1 row affected (0.09 sec)
+
+mysql> Insert into job values(668,'Analyst');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> Insert into job values(669,'SalesPerson');
+Query OK, 1 row affected (0.08 sec)
+
+mysql> Insert into job values(670,'Manager');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> Insert into job values(670,'Manager');
+ERROR 1062 (23000): Duplicate entry '670' for key 'PRIMARY'
+mysql> Insert into job values(671,'President');
+Query OK, 1 row affected (0.09 sec)
+
+mysql> select * from job;
++-------+-------------+
+| JCode | JName       |
++-------+-------------+
+|   666 | Clerk       |
+|   667 | Trainee     |
+|   668 | Analyst     |
+|   669 | SalesPerson |
+|   670 | Manager     |
+|   671 | President   |
++-------+-------------+
+6 rows in set (0.02 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| exception          |
+| information_schema |
+| mysql              |
+| performance_schema |
+| restsampledatabase |
+| sakila             |
+| storage            |
+| sys                |
+| templete           |
+| templetedata       |
+| testing            |
+| trail              |
+| users              |
+| world              |
++--------------------+
+14 rows in set (0.03 sec)
+
+mysql> create database sql_invoicing;
+Query OK, 1 row affected (0.09 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| exception          |
+| information_schema |
+| mysql              |
+| performance_schema |
+| restsampledatabase |
+| sakila             |
+| sql_invoicing      |
+| storage            |
+| sys                |
+| templete           |
+| templetedata       |
+| testing            |
+| trail              |
+| users              |
+| world              |
++--------------------+
+15 rows in set (0.00 sec)
+
+mysql> use sql_invoicing;
+Database changed
+mysql> CREATE TABLE `payment_methods` (
+    ->
+    -> `payment_method_id` tinyint(4) NOT NULL AUTO_INCREMENT,
+    ->
+    -> `name` varchar(50) NOT NULL,
+    ->
+    -> PRIMARY KEY (`payment_method_id`)
+    ->
+    -> ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+Query OK, 0 rows affected, 1 warning (0.71 sec)
+
+mysql> desc payment_methods;
++-------------------+-------------+------+-----+---------+----------------+
+| Field             | Type        | Null | Key | Default | Extra          |
++-------------------+-------------+------+-----+---------+----------------+
+| payment_method_id | tinyint(4)  | NO   | PRI | NULL    | auto_increment |
+| name              | varchar(50) | NO   |     | NULL    |                |
++-------------------+-------------+------+-----+---------+----------------+
+2 rows in set (0.01 sec)
+
+mysql> INSERT INTO `payment_methods` VALUES (1,'Credit Card');
+Query OK, 1 row affected (0.06 sec)
+
+mysql>
+mysql> INSERT INTO `payment_methods` VALUES (2,'Cash');
+Query OK, 1 row affected (0.10 sec)
+
+mysql>
+mysql> INSERT INTO `payment_methods` VALUES (3,'PayPal');
+Query OK, 1 row affected (0.06 sec)
+
+mysql>
+mysql> INSERT INTO `payment_methods` VALUES (4,'Wire Transfer');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> select * from payment_methods;
++-------------------+---------------+
+| payment_method_id | name          |
++-------------------+---------------+
+|                 1 | Credit Card   |
+|                 2 | Cash          |
+|                 3 | PayPal        |
+|                 4 | Wire Transfer |
++-------------------+---------------+
+4 rows in set (0.00 sec)
+
+mysql> CREATE TABLE `clients` (
+    ->
+    -> `client_id` int(11) NOT NULL,
+    ->
+    -> `name` varchar(50) NOT NULL,
+    ->
+    -> `address` varchar(50) NOT NULL,
+    ->
+    -> `city` varchar(50) NOT NULL,
+    ->
+    -> `state` char(2) NOT NULL,
+    ->
+    -> `phone` varchar(50) DEFAULT NULL,
+    ->
+    -> PRIMARY KEY (`client_id`)
+    ->
+    -> ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+Query OK, 0 rows affected, 1 warning (0.30 sec)
+
+mysql> desc clients;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| client_id | int(11)     | NO   | PRI | NULL    |       |
+| name      | varchar(50) | NO   |     | NULL    |       |
+| address   | varchar(50) | NO   |     | NULL    |       |
+| city      | varchar(50) | NO   |     | NULL    |       |
+| state     | char(2)     | NO   |     | NULL    |       |
+| phone     | varchar(50) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> INSERT INTO `clients` VALUES (1,'Vinte','3 Nevada Parkway','Syracuse','NY','315-252-7305');
+Query OK, 1 row affected (0.05 sec)
+
+mysql>
+mysql> INSERT INTO `clients` VALUES (2,'Myworks','34267 Glendale Parkway','Huntington','WV','304-659-1170');
+Query OK, 1 row affected (0.08 sec)
+
+mysql>
+mysql> INSERT INTO `clients` VALUES (3,'Yadel','096 Pawling Parkway','San Francisco','CA','415-144-6037');
+Query OK, 1 row affected (0.10 sec)
+
+mysql>
+mysql> INSERT INTO `clients` VALUES (4,'Kwideo','81674 Westerfield Circle','Waco','TX','254-750-0784');
+Query OK, 1 row affected (0.07 sec)
+
+mysql>
+mysql> INSERT INTO `clients` VALUES (5,'Topiclounge','0863 Farmco Road','Portland','OR','971-888-9129');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> select * from clients;
++-----------+-------------+--------------------------+---------------+-------+--------------+
+| client_id | name        | address                  | city          | state | phone        |
++-----------+-------------+--------------------------+---------------+-------+--------------+
+|         1 | Vinte       | 3 Nevada Parkway         | Syracuse      | NY    | 315-252-7305 |
+|         2 | Myworks     | 34267 Glendale Parkway   | Huntington    | WV    | 304-659-1170 |
+|         3 | Yadel       | 096 Pawling Parkway      | San Francisco | CA    | 415-144-6037 |
+|         4 | Kwideo      | 81674 Westerfield Circle | Waco          | TX    | 254-750-0784 |
+|         5 | Topiclounge | 0863 Farmco Road         | Portland      | OR    | 971-888-9129 |
++-----------+-------------+--------------------------+---------------+-------+--------------+
+5 rows in set (0.00 sec)
+
+mysql> CREATE TABLE `invoices` (
+    ->
+    -> `invoice_id` int(11) NOT NULL,
+    ->
+    -> `number` varchar(50) NOT NULL,
+    ->
+    -> `client_id` int(11) NOT NULL,
+    ->
+    -> `invoice_total` decimal(9,2) NOT NULL,
+    ->
+    -> `payment_total` decimal(9,2) NOT NULL DEFAULT '0.00',
+    ->
+    -> `invoice_date` date NOT NULL,
+    ->
+    -> `due_date` date NOT NULL,
+    ->
+    -> `payment_date` date DEFAULT NULL,
+    ->
+    -> PRIMARY KEY (`invoice_id`),
+    ->
+    -> KEY `FK_client_id` (`client_id`),
+    ->
+    -> CONSTRAINT `FK_client_id` FOREIGN KEY (`client_id`) REFERENCES `clients` (`client_id`) ON DELETE RESTRICT ON UPDATE CASCADE
+    ->
+    -> ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+Query OK, 0 rows affected, 2 warnings (0.52 sec)
+
+mysql> desc invoices;
++---------------+--------------+------+-----+---------+-------+
+| Field         | Type         | Null | Key | Default | Extra |
++---------------+--------------+------+-----+---------+-------+
+| invoice_id    | int(11)      | NO   | PRI | NULL    |       |
+| number        | varchar(50)  | NO   |     | NULL    |       |
+| client_id     | int(11)      | NO   | MUL | NULL    |       |
+| invoice_total | decimal(9,2) | NO   |     | NULL    |       |
+| payment_total | decimal(9,2) | NO   |     | 0.00    |       |
+| invoice_date  | date         | NO   |     | NULL    |       |
+| due_date      | date         | NO   |     | NULL    |       |
+| payment_date  | date         | YES  |     | NULL    |       |
++---------------+--------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> INSERT INTO `invoices` VALUES (1,'91-953-3396',2,101.79,0.00,'2019-03-09','2019-03-29',NULL);
+Query OK, 1 row affected (0.10 sec)
+
+mysql>
+mysql> INSERT INTO `invoices` VALUES (2,'03-898-6735',5,175.32,8.18,'2019-06-11','2019-07-01','2019-02-12');
+Query OK, 1 row affected (0.09 sec)
+
+mysql>
+mysql> INSERT INTO `invoices` VALUES (3,'20-228-0335',5,147.99,0.00,'2019-07-31','2019-08-20',NULL);
+Query OK, 1 row affected (0.09 sec)
+
+mysql>
+mysql> INSERT INTO `invoices` VALUES (4,'56-934-0748',3,152.21,0.00,'2019-03-08','2019-03-28',NULL);
+Query OK, 1 row affected (0.06 sec)
+
+mysql>
+mysql> INSERT INTO `invoices` VALUES (5,'87-052-3121',5,169.36,0.00,'2019-07-18','2019-08-07',NULL);
+Query OK, 1 row affected (0.06 sec)
+
+mysql>
+mysql> INSERT INTO `invoices` VALUES (6,'75-587-6626',1,157.78,74.55,'2019-01-29','2019-02-18','2019-01-03');
+Query OK, 1 row affected (0.05 sec)
+
+mysql>
+mysql> INSERT INTO `invoices` VALUES (7,'68-093-9863',3,133.87,0.00,'2019-09-04','2019-09-24',NULL);
+Query OK, 1 row affected (0.07 sec)
+
+mysql>
+mysql> INSERT INTO `invoices` VALUES (8,'78-145-1093',1,189.12,0.00,'2019-05-20','2019-06-09',NULL);
+Query OK, 1 row affected (0.05 sec)
+
+mysql>
+mysql> INSERT INTO `invoices` VALUES (9,'77-593-0081',5,172.17,0.00,'2019-07-09','2019-07-29',NULL);
+Query OK, 1 row affected (0.05 sec)
+
+mysql>
+mysql> INSERT INTO `invoices` VALUES (10,'48-266-1517',1,159.50,0.00,'2019-06-30','2019-07-20',NULL);
+Query OK, 1 row affected (0.05 sec)
+
+mysql>
+mysql> INSERT INTO `invoices` VALUES (11,'20-848-0181',3,126.15,0.03,'2019-01-07','2019-01-27','2019-01-11');
+Query OK, 1 row affected (0.07 sec)
+
+mysql>
+mysql> INSERT INTO `invoices` VALUES (13,'41-666-1035',5,135.01,87.44,'2019-06-25','2019-07-15','2019-01-26');
+Query OK, 1 row affected (0.11 sec)
+
+mysql>
+mysql> INSERT INTO `invoices` VALUES (15,'55-105-9605',3,167.29,80.31,'2019-11-25','2019-12-15','2019-01-15');
+Query OK, 1 row affected (0.05 sec)
+
+mysql>
+mysql> INSERT INTO `invoices` VALUES (16,'10-451-8824',1,162.02,0.00,'2019-03-30','2019-04-19',NULL);
+Query OK, 1 row affected (0.10 sec)
+
+mysql>
+mysql> INSERT INTO `invoices` VALUES (17,'33-615-4694',3,126.38,68.10,'2019-07-30','2019-08-19','2019-01-15');
+Query OK, 1 row affected (0.07 sec)
+
+mysql>
+mysql> INSERT INTO `invoices` VALUES (18,'52-269-9803',5,180.17,42.77,'2019-05-23','2019-06-12','2019-01-08');
+Query OK, 1 row affected (0.05 sec)
+
+mysql>
+mysql> INSERT INTO `invoices` VALUES (19,'83-559-4105',1,134.47,0.00,'2019-11-23','2019-12-13',NULL);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> select * from invoices;
++------------+-------------+-----------+---------------+---------------+--------------+------------+--------------+
+| invoice_id | number      | client_id | invoice_total | payment_total | invoice_date | due_date   | payment_date |
++------------+-------------+-----------+---------------+---------------+--------------+------------+--------------+
+|          1 | 91-953-3396 |         2 |        101.79 |          0.00 | 2019-03-09   | 2019-03-29 | NULL         |
+|          2 | 03-898-6735 |         5 |        175.32 |          8.18 | 2019-06-11   | 2019-07-01 | 2019-02-12   |
+|          3 | 20-228-0335 |         5 |        147.99 |          0.00 | 2019-07-31   | 2019-08-20 | NULL         |
+|          4 | 56-934-0748 |         3 |        152.21 |          0.00 | 2019-03-08   | 2019-03-28 | NULL         |
+|          5 | 87-052-3121 |         5 |        169.36 |          0.00 | 2019-07-18   | 2019-08-07 | NULL         |
+|          6 | 75-587-6626 |         1 |        157.78 |         74.55 | 2019-01-29   | 2019-02-18 | 2019-01-03   |
+|          7 | 68-093-9863 |         3 |        133.87 |          0.00 | 2019-09-04   | 2019-09-24 | NULL         |
+|          8 | 78-145-1093 |         1 |        189.12 |          0.00 | 2019-05-20   | 2019-06-09 | NULL         |
+|          9 | 77-593-0081 |         5 |        172.17 |          0.00 | 2019-07-09   | 2019-07-29 | NULL         |
+|         10 | 48-266-1517 |         1 |        159.50 |          0.00 | 2019-06-30   | 2019-07-20 | NULL         |
+|         11 | 20-848-0181 |         3 |        126.15 |          0.03 | 2019-01-07   | 2019-01-27 | 2019-01-11   |
+|         13 | 41-666-1035 |         5 |        135.01 |         87.44 | 2019-06-25   | 2019-07-15 | 2019-01-26   |
+|         15 | 55-105-9605 |         3 |        167.29 |         80.31 | 2019-11-25   | 2019-12-15 | 2019-01-15   |
+|         16 | 10-451-8824 |         1 |        162.02 |          0.00 | 2019-03-30   | 2019-04-19 | NULL         |
+|         17 | 33-615-4694 |         3 |        126.38 |         68.10 | 2019-07-30   | 2019-08-19 | 2019-01-15   |
+|         18 | 52-269-9803 |         5 |        180.17 |         42.77 | 2019-05-23   | 2019-06-12 | 2019-01-08   |
+|         19 | 83-559-4105 |         1 |        134.47 |          0.00 | 2019-11-23   | 2019-12-13 | NULL         |
++------------+-------------+-----------+---------------+---------------+--------------+------------+--------------+
+17 rows in set (0.00 sec)
+
+mysql> CREATE TABLE `payments` (
+    ->
+    -> `payment_id` int(11) NOT NULL AUTO_INCREMENT,
+    ->
+    -> `client_id` int(11) NOT NULL,
+    ->
+    -> `invoice_id` int(11) NOT NULL,
+    ->
+    -> `date` date NOT NULL,
+    ->
+    -> `amount` decimal(9,2) NOT NULL,
+    ->
+    -> `payment_method` tinyint(4) NOT NULL,
+    ->
+    -> PRIMARY KEY (`payment_id`),
+    ->
+    -> KEY `fk_client_id_idx` (`client_id`),
+    ->
+    -> KEY `fk_invoice_id_idx` (`invoice_id`),
+    ->
+    -> KEY `fk_payment_payment_method_idx` (`payment_method`),
+    ->
+    -> CONSTRAINT `fk_payment_client` FOREIGN KEY (`client_id`) REFERENCES `clients` (`client_id`) ON UPDATE CASCADE,
+    ->
+    -> CONSTRAINT `fk_payment_invoice` FOREIGN KEY (`invoice_id`) REFERENCES `invoices` (`invoice_id`) ON UPDATE CASCADE,
+    ->
+    -> CONSTRAINT `fk_payment_payment_method` FOREIGN KEY (`payment_method`) REFERENCES `payment_methods` (`payment_method_id`)
+    ->
+    -> ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+Query OK, 0 rows affected, 4 warnings (0.74 sec)
+
+mysql> desc payments;
++----------------+--------------+------+-----+---------+----------------+
+| Field          | Type         | Null | Key | Default | Extra          |
++----------------+--------------+------+-----+---------+----------------+
+| payment_id     | int(11)      | NO   | PRI | NULL    | auto_increment |
+| client_id      | int(11)      | NO   | MUL | NULL    |                |
+| invoice_id     | int(11)      | NO   | MUL | NULL    |                |
+| date           | date         | NO   |     | NULL    |                |
+| amount         | decimal(9,2) | NO   |     | NULL    |                |
+| payment_method | tinyint(4)   | NO   | MUL | NULL    |                |
++----------------+--------------+------+-----+---------+----------------+
+6 rows in set (0.00 sec)
+
+mysql> INSERT INTO `payments` VALUES (1,5,2,'2019-02-12',8.18,1);
+Query OK, 1 row affected (0.06 sec)
+
+mysql>
+mysql> INSERT INTO `payments` VALUES (2,1,6,'2019-01-03',74.55,1);
+Query OK, 1 row affected (0.07 sec)
+
+mysql>
+mysql> INSERT INTO `payments` VALUES (3,3,11,'2019-01-11',0.03,1);
+Query OK, 1 row affected (0.09 sec)
+
+mysql>
+mysql> INSERT INTO `payments` VALUES (4,5,13,'2019-01-26',87.44,1);
+Query OK, 1 row affected (0.05 sec)
+
+mysql>
+mysql> INSERT INTO `payments` VALUES (5,3,15,'2019-01-15',80.31,1);
+Query OK, 1 row affected (0.06 sec)
+
+mysql>
+mysql> INSERT INTO `payments` VALUES (6,3,17,'2019-01-15',68.10,1);
+Query OK, 1 row affected (0.06 sec)
+
+mysql>
+mysql> INSERT INTO `payments` VALUES (7,5,18,'2019-01-08',32.77,1);
+Query OK, 1 row affected (0.08 sec)
+
+mysql>
+mysql> INSERT INTO `payments` VALUES (8,5,18,'2019-01-08',10.00,2);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> select * from payments;
++------------+-----------+------------+------------+--------+----------------+
+| payment_id | client_id | invoice_id | date       | amount | payment_method |
++------------+-----------+------------+------------+--------+----------------+
+|          1 |         5 |          2 | 2019-02-12 |   8.18 |              1 |
+|          2 |         1 |          6 | 2019-01-03 |  74.55 |              1 |
+|          3 |         3 |         11 | 2019-01-11 |   0.03 |              1 |
+|          4 |         5 |         13 | 2019-01-26 |  87.44 |              1 |
+|          5 |         3 |         15 | 2019-01-15 |  80.31 |              1 |
+|          6 |         3 |         17 | 2019-01-15 |  68.10 |              1 |
+|          7 |         5 |         18 | 2019-01-08 |  32.77 |              1 |
+|          8 |         5 |         18 | 2019-01-08 |  10.00 |              2 |
++------------+-----------+------------+------------+--------+----------------+
+8 rows in set (0.00 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| exception          |
+| information_schema |
+| mysql              |
+| performance_schema |
+| restsampledatabase |
+| sakila             |
+| sql_invoicing      |
+| storage            |
+| sys                |
+| templete           |
+| templetedata       |
+| testing            |
+| trail              |
+| users              |
+| world              |
++--------------------+
+15 rows in set (0.00 sec)
+
+mysql> create database sql_store;
+Query OK, 1 row affected (0.07 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| exception          |
+| information_schema |
+| mysql              |
+| performance_schema |
+| restsampledatabase |
+| sakila             |
+| sql_invoicing      |
+| sql_store          |
+| storage            |
+| sys                |
+| templete           |
+| templetedata       |
+| testing            |
+| trail              |
+| users              |
+| world              |
++--------------------+
+16 rows in set (0.00 sec)
+
+mysql> use sql_store;
+Database changed
+mysql> CREATE TABLE `products` (
+    ->
+    -> `product_id` int(11) NOT NULL AUTO_INCREMENT,
+    ->
+    -> `name` varchar(50) NOT NULL,
+    ->
+    -> `quantity_in_stock` int(11) NOT NULL,
+    ->
+    -> `unit_price` decimal(4,2) NOT NULL,
+    ->
+    -> PRIMARY KEY (`product_id`)
+    ->
+    -> ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+Query OK, 0 rows affected, 2 warnings (0.39 sec)
+
+mysql> INSERT INTO `products` VALUES (1,'Foam Dinner Plate',70,1.21);
+Query OK, 1 row affected (0.05 sec)
+
+mysql>
+mysql> INSERT INTO `products` VALUES (2,'Pork - Bacon,back Peameal',49,4.65);
+Query OK, 1 row affected (0.06 sec)
+
+mysql>
+mysql> INSERT INTO `products` VALUES (3,'Lettuce - Romaine, Heart',38,3.35);
+Query OK, 1 row affected (0.08 sec)
+
+mysql>
+mysql> INSERT INTO `products` VALUES (4,'Brocolinni - Gaylan, Chinese',90,4.53);
+Query OK, 1 row affected (0.06 sec)
+
+mysql>
+mysql> INSERT INTO `products` VALUES (5,'Sauce - Ranch Dressing',94,1.63);
+Query OK, 1 row affected (0.05 sec)
+
+mysql>
+mysql> INSERT INTO `products` VALUES (6,'Petit Baguette',14,2.39);
+Query OK, 1 row affected (0.06 sec)
+
+mysql>
+mysql> INSERT INTO `products` VALUES (7,'Sweet Pea Sprouts',98,3.29);
+Query OK, 1 row affected (0.09 sec)
+
+mysql>
+mysql> INSERT INTO `products` VALUES (8,'Island Oasis - Raspberry',26,0.74);
+Query OK, 1 row affected (0.07 sec)
+
+mysql>
+mysql> INSERT INTO `products` VALUES (9,'Longan',67,2.26);
+Query OK, 1 row affected (0.04 sec)
+
+mysql>
+mysql> INSERT INTO `products` VALUES (10,'Broom - Push',6,1.09);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> select * from products;
++------------+------------------------------+-------------------+------------+
+| product_id | name                         | quantity_in_stock | unit_price |
++------------+------------------------------+-------------------+------------+
+|          1 | Foam Dinner Plate            |                70 |       1.21 |
+|          2 | Pork - Bacon,back Peameal    |                49 |       4.65 |
+|          3 | Lettuce - Romaine, Heart     |                38 |       3.35 |
+|          4 | Brocolinni - Gaylan, Chinese |                90 |       4.53 |
+|          5 | Sauce - Ranch Dressing       |                94 |       1.63 |
+|          6 | Petit Baguette               |                14 |       2.39 |
+|          7 | Sweet Pea Sprouts            |                98 |       3.29 |
+|          8 | Island Oasis - Raspberry     |                26 |       0.74 |
+|          9 | Longan                       |                67 |       2.26 |
+|         10 | Broom - Push                 |                 6 |       1.09 |
++------------+------------------------------+-------------------+------------+
+10 rows in set (0.00 sec)
+
+mysql> CREATE TABLE `shippers` (
+    ->
+    -> `shipper_id` smallint(6) NOT NULL AUTO_INCREMENT,
+    ->
+    -> `name` varchar(50) NOT NULL,
+    ->
+    -> PRIMARY KEY (`shipper_id`)
+    ->
+    -> ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+Query OK, 0 rows affected, 1 warning (2.27 sec)
+
+mysql> INSERT INTO `shippers` VALUES (1,'Hettinger LLC');
+Query OK, 1 row affected (0.09 sec)
+
+mysql>
+mysql> INSERT INTO `shippers` VALUES (2,'Schinner-Predovic');
+Query OK, 1 row affected (0.12 sec)
+
+mysql>
+mysql> INSERT INTO `shippers` VALUES (3,'Satterfield LLC');
+Query OK, 1 row affected (0.08 sec)
+
+mysql>
+mysql> INSERT INTO `shippers` VALUES (4,'Mraz, Renner and Nolan');
+Query OK, 1 row affected (0.06 sec)
+
+mysql>
+mysql> INSERT INTO `shippers` VALUES (5,'Waters, Mayert and Prohaska');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> select * from shippers;
++------------+-----------------------------+
+| shipper_id | name                        |
++------------+-----------------------------+
+|          1 | Hettinger LLC               |
+|          2 | Schinner-Predovic           |
+|          3 | Satterfield LLC             |
+|          4 | Mraz, Renner and Nolan      |
+|          5 | Waters, Mayert and Prohaska |
++------------+-----------------------------+
+5 rows in set (0.00 sec)
+
+mysql> CREATE TABLE `customers` (
+    ->
+    -> `customer_id` int(11) NOT NULL AUTO_INCREMENT,
+    ->
+    -> `first_name` varchar(50) NOT NULL,
+    ->
+    -> `last_name` varchar(50) NOT NULL,
+    ->
+    -> `birth_date` date DEFAULT NULL,
+    ->
+    -> `phone` varchar(50) DEFAULT NULL,
+    ->
+    -> `address` varchar(50) NOT NULL,
+    ->
+    -> `city` varchar(50) NOT NULL,
+    ->
+    -> `state` char(2) NOT NULL,
+    ->
+    -> `points` int(11) NOT NULL DEFAULT '0',
+    ->
+    -> PRIMARY KEY (`customer_id`)
+    ->
+    -> ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+Query OK, 0 rows affected, 2 warnings (0.35 sec)
+
+mysql> INSERT INTO `customers` VALUES (1,'Babara','MacCaffrey','1986-03-28','781-932-9754','0 Sage Terrace','Waltham','MA',2273);
+Query OK, 1 row affected (0.10 sec)
+
+mysql>
+mysql> INSERT INTO `customers` VALUES (2,'Ines','Brushfield','1986-04-13','804-427-9456','14187 Commercial Trail','Hampton','VA',947);
+Query OK, 1 row affected (0.12 sec)
+
+mysql>
+mysql> INSERT INTO `customers` VALUES (3,'Freddi','Boagey','1985-02-07','719-724-7869','251 Springs Junction','Colorado Springs','CO',2967);
+Query OK, 1 row affected (0.06 sec)
+
+mysql>
+mysql> INSERT INTO `customers` VALUES (4,'Ambur','Roseburgh','1974-04-14','407-231-8017','30 Arapahoe Terrace','Orlando','FL',457);
+Query OK, 1 row affected (0.06 sec)
+
+mysql>
+mysql> INSERT INTO `customers` VALUES (5,'Clemmie','Betchley','1973-11-07',NULL,'5 Spohn Circle','Arlington','TX',3675);
+Query OK, 1 row affected (0.05 sec)
+
+mysql>
+mysql> INSERT INTO `customers` VALUES (6,'Elka','Twiddell','1991-09-04','312-480-8498','7 Manley Drive','Chicago','IL',3073);
+Query OK, 1 row affected (0.08 sec)
+
+mysql>
+mysql> INSERT INTO `customers` VALUES (7,'Ilene','Dowson','1964-08-30','615-641-4759','50 Lillian Crossing','Nashville','TN',1672);
+Query OK, 1 row affected (0.11 sec)
+
+mysql>
+mysql> INSERT INTO `customers` VALUES (8,'Thacher','Naseby','1993-07-17','941-527-3977','538 Mosinee Center','Sarasota','FL',205);
+Query OK, 1 row affected (0.12 sec)
+
+mysql>
+mysql> INSERT INTO `customers` VALUES (9,'Romola','Rumgay','1992-05-23','559-181-3744','3520 Ohio Trail','Visalia','CA',1486);
+Query OK, 1 row affected (0.08 sec)
+
+mysql>
+mysql> INSERT INTO `customers` VALUES (10,'Levy','Mynett','1969-10-13','404-246-3370','68 Lawn Avenue','Atlanta','GA',796);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> select * from customers;
++-------------+------------+------------+------------+--------------+------------------------+------------------+-------+--------+
+| customer_id | first_name | last_name  | birth_date | phone        | address                | city             | state | points |
++-------------+------------+------------+------------+--------------+------------------------+------------------+-------+--------+
+|           1 | Babara     | MacCaffrey | 1986-03-28 | 781-932-9754 | 0 Sage Terrace         | Waltham          | MA    |   2273 |
+|           2 | Ines       | Brushfield | 1986-04-13 | 804-427-9456 | 14187 Commercial Trail | Hampton          | VA    |    947 |
+|           3 | Freddi     | Boagey     | 1985-02-07 | 719-724-7869 | 251 Springs Junction   | Colorado Springs | CO    |   2967 |
+|           4 | Ambur      | Roseburgh  | 1974-04-14 | 407-231-8017 | 30 Arapahoe Terrace    | Orlando          | FL    |    457 |
+|           5 | Clemmie    | Betchley   | 1973-11-07 | NULL         | 5 Spohn Circle         | Arlington        | TX    |   3675 |
+|           6 | Elka       | Twiddell   | 1991-09-04 | 312-480-8498 | 7 Manley Drive         | Chicago          | IL    |   3073 |
+|           7 | Ilene      | Dowson     | 1964-08-30 | 615-641-4759 | 50 Lillian Crossing    | Nashville        | TN    |   1672 |
+|           8 | Thacher    | Naseby     | 1993-07-17 | 941-527-3977 | 538 Mosinee Center     | Sarasota         | FL    |    205 |
+|           9 | Romola     | Rumgay     | 1992-05-23 | 559-181-3744 | 3520 Ohio Trail        | Visalia          | CA    |   1486 |
+|          10 | Levy       | Mynett     | 1969-10-13 | 404-246-3370 | 68 Lawn Avenue         | Atlanta          | GA    |    796 |
++-------------+------------+------------+------------+--------------+------------------------+------------------+-------+--------+
+10 rows in set (0.00 sec)
+
+mysql> CREATE TABLE `order_statuses` (
+    ->
+    -> `order_status_id` tinyint(4) NOT NULL,
+    ->
+    -> `name` varchar(50) NOT NULL,
+    ->
+    -> PRIMARY KEY (`order_status_id`)
+    ->
+    -> ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+Query OK, 0 rows affected, 1 warning (0.35 sec)
+
+mysql> INSERT INTO `order_statuses` VALUES (1,'Processed');
+Query OK, 1 row affected (0.06 sec)
+
+mysql>
+mysql> INSERT INTO `order_statuses` VALUES (2,'Shipped');
+Query OK, 1 row affected (0.10 sec)
+
+mysql>
+mysql> INSERT INTO `order_statuses` VALUES (3,'Delivered');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> select * from values;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'values' at line 1
+mysql> select * from order_statuses;
++-----------------+-----------+
+| order_status_id | name      |
++-----------------+-----------+
+|               1 | Processed |
+|               2 | Shipped   |
+|               3 | Delivered |
++-----------------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> CREATE TABLE `orders` (
+    ->
+    -> `order_id` int(11) NOT NULL AUTO_INCREMENT,
+    ->
+    -> `customer_id` int(11) NOT NULL,
+    ->
+    -> `order_date` date NOT NULL,
+    ->
+    -> `status` tinyint(4) NOT NULL DEFAULT '1',
+    ->
+    -> `comments` varchar(2000) DEFAULT NULL,
+    ->
+    -> `shipped_date` date DEFAULT NULL,
+    ->
+    -> `shipper_id` smallint(6) DEFAULT NULL,
+    ->
+    -> PRIMARY KEY (`order_id`),
+    ->
+    -> KEY `fk_orders_customers_idx` (`customer_id`),
+    ->
+    -> KEY `fk_orders_shippers_idx` (`shipper_id`),
+    ->
+    -> KEY `fk_orders_order_statuses_idx` (`status`),
+    ->
+    -> CONSTRAINT `fk_orders_customers` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`customer_id`) ON UPDATE CASCADE,
+    ->
+    -> CONSTRAINT `fk_orders_order_statuses` FOREIGN KEY (`status`) REFERENCES `order_statuses` (`order_status_id`) ON UPDATE CASCADE,
+    ->
+    -> CONSTRAINT `fk_orders_shippers` FOREIGN KEY (`shipper_id`) REFERENCES `shippers` (`shipper_id`) ON UPDATE CASCADE
+    ->
+    -> ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+Query OK, 0 rows affected, 4 warnings (0.66 sec)
+
+mysql> INSERT INTO `orders` VALUES (1,6,'2019-01-30',1,NULL,NULL,NULL);
+Query OK, 1 row affected (0.06 sec)
+
+mysql>
+mysql> INSERT INTO `orders` VALUES (2,7,'2018-08-02',2,NULL,'2018-08-03',4);
+Query OK, 1 row affected (0.10 sec)
+
+mysql>
+mysql> INSERT INTO `orders` VALUES (3,8,'2017-12-01',1,NULL,NULL,NULL);
+Query OK, 1 row affected (0.09 sec)
+
+mysql>
+mysql> INSERT INTO `orders` VALUES (4,2,'2017-01-22',1,NULL,NULL,NULL);
+Query OK, 1 row affected (0.14 sec)
+
+mysql>
+mysql> INSERT INTO `orders` VALUES (5,5,'2017-08-25',2,'','2017-08-26',3);
+Query OK, 1 row affected (0.10 sec)
+
+mysql>
+mysql> INSERT INTO `orders` VALUES (6,10,'2018-11-18',1,'Aliquam erat volutpat. In congue.',NULL,NULL);
+Query OK, 1 row affected (0.15 sec)
+
+mysql>
+mysql> INSERT INTO `orders` VALUES (7,2,'2018-09-22',2,NULL,'2018-09-23',4);
+Query OK, 1 row affected (0.08 sec)
+
+mysql>
+mysql> INSERT INTO `orders` VALUES (8,5,'2018-06-08',1,'Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis.',NULL,NULL);
+Query OK, 1 row affected (0.14 sec)
+
+mysql>
+mysql> INSERT INTO `orders` VALUES (9,10,'2017-07-05',2,'Nulla mollis molestie lorem. Quisque ut erat.','2017-07-06',1);
+Query OK, 1 row affected (0.08 sec)
+
+mysql>
+mysql> INSERT INTO `orders` VALUES (10,6,'2018-04-22',2,NULL,'2018-04-23',2);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> select * from orders;
++----------+-------------+------------+--------+-----------------------------------------------------------------------+--------------+------------+
+| order_id | customer_id | order_date | status | comments                                                              | shipped_date | shipper_id |
++----------+-------------+------------+--------+-----------------------------------------------------------------------+--------------+------------+
+|        1 |           6 | 2019-01-30 |      1 | NULL                                                                  | NULL         |       NULL |
+|        2 |           7 | 2018-08-02 |      2 | NULL                                                                  | 2018-08-03   |          4 |
+|        3 |           8 | 2017-12-01 |      1 | NULL                                                                  | NULL         |       NULL |
+|        4 |           2 | 2017-01-22 |      1 | NULL                                                                  | NULL         |       NULL |
+|        5 |           5 | 2017-08-25 |      2 |                                                                       | 2017-08-26   |          3 |
+|        6 |          10 | 2018-11-18 |      1 | Aliquam erat volutpat. In congue.                                     | NULL         |       NULL |
+|        7 |           2 | 2018-09-22 |      2 | NULL                                                                  | 2018-09-23   |          4 |
+|        8 |           5 | 2018-06-08 |      1 | Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. | NULL         |       NULL |
+|        9 |          10 | 2017-07-05 |      2 | Nulla mollis molestie lorem. Quisque ut erat.                         | 2017-07-06   |          1 |
+|       10 |           6 | 2018-04-22 |      2 | NULL                                                                  | 2018-04-23   |          2 |
++----------+-------------+------------+--------+-----------------------------------------------------------------------+--------------+------------+
+10 rows in set (0.00 sec)
+
+mysql> CREATE TABLE `order_items` (
+    ->
+    -> `order_id` int(11) NOT NULL AUTO_INCREMENT,
+    ->
+    -> `product_id` int(11) NOT NULL,
+    ->
+    -> `quantity` int(11) NOT NULL,
+    ->
+    -> `unit_price` decimal(4,2) NOT NULL,
+    ->
+    -> PRIMARY KEY (`order_id`,`product_id`),
+    ->
+    -> KEY `fk_order_items_products_idx` (`product_id`),
+    ->
+    -> CONSTRAINT `fk_order_items_orders` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`) ON UPDATE CASCADE,
+    ->
+    -> CONSTRAINT `fk_order_items_products` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON UPDATE CASCADE
+    ->
+    -> ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+Query OK, 0 rows affected, 3 warnings (0.63 sec)
+
+mysql> INSERT INTO `order_items` VALUES (2,1,2,9.10);
+Query OK, 1 row affected (0.11 sec)
+
+mysql>
+mysql> INSERT INTO `order_items` VALUES (2,4,4,1.66);
+Query OK, 1 row affected (0.07 sec)
+
+mysql>
+mysql> INSERT INTO `order_items` VALUES (2,6,2,2.94);
+Query OK, 1 row affected (0.12 sec)
+
+mysql>
+mysql> INSERT INTO `order_items` VALUES (3,3,10,9.12);
+Query OK, 1 row affected (0.05 sec)
+
+mysql>
+mysql> INSERT INTO `order_items` VALUES (4,3,7,6.99);
+Query OK, 1 row affected (0.07 sec)
+
+mysql>
+mysql> INSERT INTO `order_items` VALUES (4,10,7,6.40);
+Query OK, 1 row affected (0.06 sec)
+
+mysql>
+mysql> INSERT INTO `order_items` VALUES (5,2,3,9.89);
+Query OK, 1 row affected (0.05 sec)
+
+mysql>
+mysql> INSERT INTO `order_items` VALUES (6,1,4,8.65);
+Query OK, 1 row affected (0.08 sec)
+
+mysql>
+mysql> INSERT INTO `order_items` VALUES (6,2,4,3.28);
+Query OK, 1 row affected (0.09 sec)
+
+mysql>
+mysql> INSERT INTO `order_items` VALUES (6,3,4,7.46);
+Query OK, 1 row affected (0.05 sec)
+
+mysql>
+mysql> INSERT INTO `order_items` VALUES (6,5,1,3.45);
+Query OK, 1 row affected (0.09 sec)
+
+mysql>
+mysql> INSERT INTO `order_items` VALUES (7,3,7,9.17);
+Query OK, 1 row affected (0.12 sec)
+
+mysql>
+mysql> INSERT INTO `order_items` VALUES (8,5,2,6.94);
+Query OK, 1 row affected (0.12 sec)
+
+mysql>
+mysql> INSERT INTO `order_items` VALUES (8,8,2,8.59);
+Query OK, 1 row affected (0.09 sec)
+
+mysql>
+mysql> INSERT INTO `order_items` VALUES (9,6,5,7.28);
+Query OK, 1 row affected (0.05 sec)
+
+mysql>
+mysql> INSERT INTO `order_items` VALUES (10,1,10,6.01);
+Query OK, 1 row affected (0.05 sec)
+
+mysql>
+mysql> INSERT INTO `order_items` VALUES (10,9,9,4.28);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> select * from order_items;
++----------+------------+----------+------------+
+| order_id | product_id | quantity | unit_price |
++----------+------------+----------+------------+
+|        2 |          1 |        2 |       9.10 |
+|        2 |          4 |        4 |       1.66 |
+|        2 |          6 |        2 |       2.94 |
+|        3 |          3 |       10 |       9.12 |
+|        4 |          3 |        7 |       6.99 |
+|        4 |         10 |        7 |       6.40 |
+|        5 |          2 |        3 |       9.89 |
+|        6 |          1 |        4 |       8.65 |
+|        6 |          2 |        4 |       3.28 |
+|        6 |          3 |        4 |       7.46 |
+|        6 |          5 |        1 |       3.45 |
+|        7 |          3 |        7 |       9.17 |
+|        8 |          5 |        2 |       6.94 |
+|        8 |          8 |        2 |       8.59 |
+|        9 |          6 |        5 |       7.28 |
+|       10 |          1 |       10 |       6.01 |
+|       10 |          9 |        9 |       4.28 |
++----------+------------+----------+------------+
+17 rows in set (0.02 sec)
+
+mysql> CREATE TABLE `sql_store`.`order_item_notes` (
+    ->
+    -> `note_id` INT NOT NULL,
+    ->
+    -> `order_Id` INT NOT NULL,
+    ->
+    -> `product_id` INT NOT NULL,
+    ->
+    -> `note` VARCHAR(255) NOT NULL,
+    ->
+    -> PRIMARY KEY (`note_id`));
+Query OK, 0 rows affected (0.52 sec)
+
+mysql> INSERT INTO `order_item_notes` (`note_id`, `order_Id`, `product_id`, `note`) VALUES ('1', '1', '2', 'first note');
+Query OK, 1 row affected (0.08 sec)
+
+mysql>
+mysql> INSERT INTO `order_item_notes` (`note_id`, `order_Id`, `product_id`, `note`) VALUES ('2', '1', '2', 'second note');
+Query OK, 1 row affected (0.08 sec)
+
+mysql> select * from order_item_notes;
++---------+----------+------------+-------------+
+| note_id | order_Id | product_id | note        |
++---------+----------+------------+-------------+
+|       1 |        1 |          2 | first note  |
+|       2 |        1 |          2 | second note |
++---------+----------+------------+-------------+
+2 rows in set (0.00 sec)
+
+mysql> create database sql_hr;
+Query OK, 1 row affected (0.10 sec)
+
+mysql> use sql_hr;
+Database changed
+mysql> CREATE TABLE `offices` (
+    ->
+    -> `office_id` int(11) NOT NULL,
+    ->
+    -> `address` varchar(50) NOT NULL,
+    ->
+    -> `city` varchar(50) NOT NULL,
+    ->
+    -> `state` varchar(50) NOT NULL,
+    ->
+    -> PRIMARY KEY (`office_id`)
+    ->
+    -> ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+Query OK, 0 rows affected, 1 warning (0.45 sec)
+
+mysql> INSERT INTO `offices` VALUES (1,'03 Reinke Trail','Cincinnati','OH');
+Query OK, 1 row affected (0.06 sec)
+
+mysql>
+mysql> INSERT INTO `offices` VALUES (2,'5507 Becker Terrace','New York City','NY');
+Query OK, 1 row affected (0.08 sec)
+
+mysql>
+mysql> INSERT INTO `offices` VALUES (3,'54 Northland Court','Richmond','VA');
+Query OK, 1 row affected (0.09 sec)
+
+mysql>
+mysql> INSERT INTO `offices` VALUES (4,'08 South Crossing','Cincinnati','OH');
+Query OK, 1 row affected (0.07 sec)
+
+mysql>
+mysql> INSERT INTO `offices` VALUES (5,'553 Maple Drive','Minneapolis','MN');
+Query OK, 1 row affected (0.07 sec)
+
+mysql>
+mysql> INSERT INTO `offices` VALUES (6,'23 North Plaza','Aurora','CO');
+Query OK, 1 row affected (0.05 sec)
+
+mysql>
+mysql> INSERT INTO `offices` VALUES (7,'9658 Wayridge Court','Boise','ID');
+Query OK, 1 row affected (0.05 sec)
+
+mysql>
+mysql> INSERT INTO `offices` VALUES (8,'9 Grayhawk Trail','New York City','NY');
+Query OK, 1 row affected (0.08 sec)
+
+mysql>
+mysql> INSERT INTO `offices` VALUES (9,'16862 Westend Hill','Knoxville','TN');
+Query OK, 1 row affected (0.07 sec)
+
+mysql>
+mysql> INSERT INTO `offices` VALUES (10,'4 Bluestem Parkway','Savannah','GA');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> select * from offices;
++-----------+---------------------+---------------+-------+
+| office_id | address             | city          | state |
++-----------+---------------------+---------------+-------+
+|         1 | 03 Reinke Trail     | Cincinnati    | OH    |
+|         2 | 5507 Becker Terrace | New York City | NY    |
+|         3 | 54 Northland Court  | Richmond      | VA    |
+|         4 | 08 South Crossing   | Cincinnati    | OH    |
+|         5 | 553 Maple Drive     | Minneapolis   | MN    |
+|         6 | 23 North Plaza      | Aurora        | CO    |
+|         7 | 9658 Wayridge Court | Boise         | ID    |
+|         8 | 9 Grayhawk Trail    | New York City | NY    |
+|         9 | 16862 Westend Hill  | Knoxville     | TN    |
+|        10 | 4 Bluestem Parkway  | Savannah      | GA    |
++-----------+---------------------+---------------+-------+
+10 rows in set (0.00 sec)
+
+mysql> CREATE TABLE `employees` (
+    ->
+    -> `employee_id` int(11) NOT NULL,
+    ->
+    -> `first_name` varchar(50) NOT NULL,
+    ->
+    -> `last_name` varchar(50) NOT NULL,
+    ->
+    -> `job_title` varchar(50) NOT NULL,
+    ->
+    -> `salary` int(11) NOT NULL,
+    ->
+    -> `reports_to` int(11) DEFAULT NULL,
+    ->
+    -> `office_id` int(11) NOT NULL,
+    ->
+    -> PRIMARY KEY (`employee_id`),
+    ->
+    -> KEY `fk_employees_offices_idx` (`office_id`),
+    ->
+    -> KEY `fk_employees_employees_idx` (`reports_to`),
+    ->
+    -> CONSTRAINT `fk_employees_managers` FOREIGN KEY (`reports_to`) REFERENCES `employees` (`employee_id`),
+    ->
+    -> CONSTRAINT `fk_employees_offices` FOREIGN KEY (`office_id`) REFERENCES `offices` (`office_id`) ON UPDATE CASCADE
+    ->
+    -> ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+Query OK, 0 rows affected, 4 warnings (0.58 sec)
+
+mysql> INSERT INTO `employees` VALUES (33391,'D\'arcy','Nortunen','Account Executive',62871,37270,1);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`sql_hr`.`employees`, CONSTRAINT `fk_employees_managers` FOREIGN KEY (`reports_to`) REFERENCES `employees` (`employee_id`))
+mysql>
+mysql> INSERT INTO `employees` VALUES (37851,'Sayer','Matterson','Statistician III',98926,37270,1);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`sql_hr`.`employees`, CONSTRAINT `fk_employees_managers` FOREIGN KEY (`reports_to`) REFERENCES `employees` (`employee_id`))
+mysql>
+mysql> INSERT INTO `employees` VALUES (40448,'Mindy','Crissil','Staff Scientist',94860,37270,1);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`sql_hr`.`employees`, CONSTRAINT `fk_employees_managers` FOREIGN KEY (`reports_to`) REFERENCES `employees` (`employee_id`))
+mysql>
+mysql> INSERT INTO `employees` VALUES (56274,'Keriann','Alloisi','VP Marketing',110150,37270,1);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`sql_hr`.`employees`, CONSTRAINT `fk_employees_managers` FOREIGN KEY (`reports_to`) REFERENCES `employees` (`employee_id`))
+mysql>
+mysql> INSERT INTO `employees` VALUES (63196,'Alaster','Scutchin','Assistant Professor',32179,37270,2);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`sql_hr`.`employees`, CONSTRAINT `fk_employees_managers` FOREIGN KEY (`reports_to`) REFERENCES `employees` (`employee_id`))
+mysql>
+mysql> INSERT INTO `employees` VALUES (67009,'North','de Clerc','VP Product Management',114257,37270,2);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`sql_hr`.`employees`, CONSTRAINT `fk_employees_managers` FOREIGN KEY (`reports_to`) REFERENCES `employees` (`employee_id`))
+mysql>
+mysql> INSERT INTO `employees` VALUES (67370,'Elladine','Rising','Social Worker',96767,37270,2);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`sql_hr`.`employees`, CONSTRAINT `fk_employees_managers` FOREIGN KEY (`reports_to`) REFERENCES `employees` (`employee_id`))
+mysql>
+mysql> INSERT INTO `employees` VALUES (68249,'Nisse','Voysey','Financial Advisor',52832,37270,2);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`sql_hr`.`employees`, CONSTRAINT `fk_employees_managers` FOREIGN KEY (`reports_to`) REFERENCES `employees` (`employee_id`))
+mysql>
+mysql> INSERT INTO `employees` VALUES (72540,'Guthrey','Iacopetti','Office Assistant I',117690,37270,3);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`sql_hr`.`employees`, CONSTRAINT `fk_employees_managers` FOREIGN KEY (`reports_to`) REFERENCES `employees` (`employee_id`))
+mysql>
+mysql> INSERT INTO `employees` VALUES (72913,'Kass','Hefferan','Computer Systems Analyst IV',96401,37270,3);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`sql_hr`.`employees`, CONSTRAINT `fk_employees_managers` FOREIGN KEY (`reports_to`) REFERENCES `employees` (`employee_id`))
+mysql>
+mysql> INSERT INTO `employees` VALUES (75900,'Virge','Goodrum','Information Systems Manager',54578,37270,3);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`sql_hr`.`employees`, CONSTRAINT `fk_employees_managers` FOREIGN KEY (`reports_to`) REFERENCES `employees` (`employee_id`))
+mysql>
+mysql> INSERT INTO `employees` VALUES (76196,'Mirilla','Janowski','Cost Accountant',119241,37270,3);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`sql_hr`.`employees`, CONSTRAINT `fk_employees_managers` FOREIGN KEY (`reports_to`) REFERENCES `employees` (`employee_id`))
+mysql>
+mysql> INSERT INTO `employees` VALUES (80529,'Lynde','Aronson','Junior Executive',77182,37270,4);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`sql_hr`.`employees`, CONSTRAINT `fk_employees_managers` FOREIGN KEY (`reports_to`) REFERENCES `employees` (`employee_id`))
+mysql>
+mysql> INSERT INTO `employees` VALUES (80679,'Mildrid','Sokale','Geologist II',67987,37270,4);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`sql_hr`.`employees`, CONSTRAINT `fk_employees_managers` FOREIGN KEY (`reports_to`) REFERENCES `employees` (`employee_id`))
+mysql>
+mysql> INSERT INTO `employees` VALUES (84791,'Hazel','Tarbert','General Manager',93760,37270,4);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`sql_hr`.`employees`, CONSTRAINT `fk_employees_managers` FOREIGN KEY (`reports_to`) REFERENCES `employees` (`employee_id`))
+mysql>
+mysql> INSERT INTO `employees` VALUES (95213,'Cole','Kesterton','Pharmacist',86119,37270,4);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`sql_hr`.`employees`, CONSTRAINT `fk_employees_managers` FOREIGN KEY (`reports_to`) REFERENCES `employees` (`employee_id`))
+mysql>
+mysql> INSERT INTO `employees` VALUES (96513,'Theresa','Binney','Food Chemist',47354,37270,5);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`sql_hr`.`employees`, CONSTRAINT `fk_employees_managers` FOREIGN KEY (`reports_to`) REFERENCES `employees` (`employee_id`))
+mysql>
+mysql> INSERT INTO `employees` VALUES (98374,'Estrellita','Daleman','Staff Accountant IV',70187,37270,5);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`sql_hr`.`employees`, CONSTRAINT `fk_employees_managers` FOREIGN KEY (`reports_to`) REFERENCES `employees` (`employee_id`))
+mysql>
+mysql> INSERT INTO `employees` VALUES (115357,'Ivy','Fearey','Structural Engineer',92710,37270,5);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`sql_hr`.`employees`, CONSTRAINT `fk_employees_managers` FOREIGN KEY (`reports_to`) REFERENCES `employees` (`employee_id`))
+mysql> desc employees;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| employee_id | int(11)     | NO   | PRI | NULL    |       |
+| first_name  | varchar(50) | NO   |     | NULL    |       |
+| last_name   | varchar(50) | NO   |     | NULL    |       |
+| job_title   | varchar(50) | NO   |     | NULL    |       |
+| salary      | int(11)     | NO   |     | NULL    |       |
+| reports_to  | int(11)     | YES  | MUL | NULL    |       |
+| office_id   | int(11)     | NO   | MUL | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+7 rows in set (0.03 sec)
+
+mysql> INSERT INTO `employees` VALUES (33391,'D\'arcy','Nortunen','Account Executive',62871,37270,1);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`sql_hr`.`employees`, CONSTRAINT `fk_employees_managers` FOREIGN KEY (`reports_to`) REFERENCES `employees` (`employee_id`))
+mysql> INSERT INTO `employees` VALUES (115357,'Ivy','Fearey','Structural Engineer',92710,37270,5);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`sql_hr`.`employees`, CONSTRAINT `fk_employees_managers` FOREIGN KEY (`reports_to`) REFERENCES `employees` (`employee_id`))
+mysql> INSERT INTO `employees` VALUES (37851,'Sayer','Matterson','Statistician III',98926,37270,1);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`sql_hr`.`employees`, CONSTRAINT `fk_employees_managers` FOREIGN KEY (`reports_to`) REFERENCES `employees` (`employee_id`) ON DELETE CASCADE ON UPDATE CASCADE)
+mysql> INSERT INTO `employees` VALUES (37851,'Sayer','Matterson','Statistician III',98926,37270,1);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> select * from employee;
+ERROR 1146 (42S02): Table 'sql_hr.employee' doesn't exist
+mysql> select * from employees;
++-------------+------------+-----------+------------------+--------+------------+-----------+
+| employee_id | first_name | last_name | job_title        | salary | reports_to | office_id |
++-------------+------------+-----------+------------------+--------+------------+-----------+
+|       37851 | Sayer      | Matterson | Statistician III |  98926 |      37270 |         1 |
++-------------+------------+-----------+------------------+--------+------------+-----------+
+1 row in set (0.00 sec)
+
+mysql> delete from employees where employee_id=37851;
+Query OK, 1 row affected (0.07 sec)
+
+mysql> INSERT INTO `employees` VALUES (37270,'Yovonnda','Magrannell','Executive Secretary',63996,NULL,10);
+Query OK, 1 row affected (0.06 sec)
+
+mysql>
+mysql> INSERT INTO `employees` VALUES (33391,'D\'arcy','Nortunen','Account Executive',62871,37270,1);
+Query OK, 1 row affected (0.09 sec)
+
+mysql>
+mysql> INSERT INTO `employees` VALUES (37851,'Sayer','Matterson','Statistician III',98926,37270,1);
+Query OK, 1 row affected (0.07 sec)
+
+mysql>
+mysql> INSERT INTO `employees` VALUES (40448,'Mindy','Crissil','Staff Scientist',94860,37270,1);
+Query OK, 1 row affected (0.10 sec)
+
+mysql>
+mysql> INSERT INTO `employees` VALUES (56274,'Keriann','Alloisi','VP Marketing',110150,37270,1);
+Query OK, 1 row affected (0.10 sec)
+
+mysql>
+mysql> INSERT INTO `employees` VALUES (63196,'Alaster','Scutchin','Assistant Professor',32179,37270,2);
+Query OK, 1 row affected (0.13 sec)
+
+mysql>
+mysql> INSERT INTO `employees` VALUES (67009,'North','de Clerc','VP Product Management',114257,37270,2);
+Query OK, 1 row affected (0.08 sec)
+
+mysql>
+mysql> INSERT INTO `employees` VALUES (67370,'Elladine','Rising','Social Worker',96767,37270,2);
+Query OK, 1 row affected (0.10 sec)
+
+mysql>
+mysql> INSERT INTO `employees` VALUES (68249,'Nisse','Voysey','Financial Advisor',52832,37270,2);
+Query OK, 1 row affected (0.18 sec)
+
+mysql>
+mysql> INSERT INTO `employees` VALUES (72540,'Guthrey','Iacopetti','Office Assistant I',117690,37270,3);
+Query OK, 1 row affected (0.10 sec)
+
+mysql>
+mysql> INSERT INTO `employees` VALUES (72913,'Kass','Hefferan','Computer Systems Analyst IV',96401,37270,3);
+Query OK, 1 row affected (0.06 sec)
+
+mysql>
+mysql> INSERT INTO `employees` VALUES (75900,'Virge','Goodrum','Information Systems Manager',54578,37270,3);
+Query OK, 1 row affected (0.07 sec)
+
+mysql>
+mysql> INSERT INTO `employees` VALUES (76196,'Mirilla','Janowski','Cost Accountant',119241,37270,3);
+Query OK, 1 row affected (0.13 sec)
+
+mysql>
+mysql> INSERT INTO `employees` VALUES (80529,'Lynde','Aronson','Junior Executive',77182,37270,4);
+Query OK, 1 row affected (0.10 sec)
+
+mysql>
+mysql> INSERT INTO `employees` VALUES (80679,'Mildrid','Sokale','Geologist II',67987,37270,4);
+Query OK, 1 row affected (0.18 sec)
+
+mysql>
+mysql> INSERT INTO `employees` VALUES (84791,'Hazel','Tarbert','General Manager',93760,37270,4);
+Query OK, 1 row affected (0.15 sec)
+
+mysql>
+mysql> INSERT INTO `employees` VALUES (95213,'Cole','Kesterton','Pharmacist',86119,37270,4);
+Query OK, 1 row affected (0.15 sec)
+
+mysql>
+mysql> INSERT INTO `employees` VALUES (96513,'Theresa','Binney','Food Chemist',47354,37270,5);
+Query OK, 1 row affected (0.11 sec)
+
+mysql>
+mysql> INSERT INTO `employees` VALUES (98374,'Estrellita','Daleman','Staff Accountant IV',70187,37270,5);
+Query OK, 1 row affected (0.10 sec)
+
+mysql>
+mysql> INSERT INTO `employees` VALUES (115357,'Ivy','Fearey','Structural Engineer',92710,37270,5);
+Query OK, 1 row affected (0.18 sec)
+
+mysql> select * from employee;
+ERROR 1146 (42S02): Table 'sql_hr.employee' doesn't exist
+mysql> select * from employees;
++-------------+------------+------------+-----------------------------+--------+------------+-----------+
+| employee_id | first_name | last_name  | job_title                   | salary | reports_to | office_id |
++-------------+------------+------------+-----------------------------+--------+------------+-----------+
+|       33391 | D'arcy     | Nortunen   | Account Executive           |  62871 |      37270 |         1 |
+|       37270 | Yovonnda   | Magrannell | Executive Secretary         |  63996 |       NULL |        10 |
+|       37851 | Sayer      | Matterson  | Statistician III            |  98926 |      37270 |         1 |
+|       40448 | Mindy      | Crissil    | Staff Scientist             |  94860 |      37270 |         1 |
+|       56274 | Keriann    | Alloisi    | VP Marketing                | 110150 |      37270 |         1 |
+|       63196 | Alaster    | Scutchin   | Assistant Professor         |  32179 |      37270 |         2 |
+|       67009 | North      | de Clerc   | VP Product Management       | 114257 |      37270 |         2 |
+|       67370 | Elladine   | Rising     | Social Worker               |  96767 |      37270 |         2 |
+|       68249 | Nisse      | Voysey     | Financial Advisor           |  52832 |      37270 |         2 |
+|       72540 | Guthrey    | Iacopetti  | Office Assistant I          | 117690 |      37270 |         3 |
+|       72913 | Kass       | Hefferan   | Computer Systems Analyst IV |  96401 |      37270 |         3 |
+|       75900 | Virge      | Goodrum    | Information Systems Manager |  54578 |      37270 |         3 |
+|       76196 | Mirilla    | Janowski   | Cost Accountant             | 119241 |      37270 |         3 |
+|       80529 | Lynde      | Aronson    | Junior Executive            |  77182 |      37270 |         4 |
+|       80679 | Mildrid    | Sokale     | Geologist II                |  67987 |      37270 |         4 |
+|       84791 | Hazel      | Tarbert    | General Manager             |  93760 |      37270 |         4 |
+|       95213 | Cole       | Kesterton  | Pharmacist                  |  86119 |      37270 |         4 |
+|       96513 | Theresa    | Binney     | Food Chemist                |  47354 |      37270 |         5 |
+|       98374 | Estrellita | Daleman    | Staff Accountant IV         |  70187 |      37270 |         5 |
+|      115357 | Ivy        | Fearey     | Structural Engineer         |  92710 |      37270 |         5 |
++-------------+------------+------------+-----------------------------+--------+------------+-----------+
+20 rows in set (0.00 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| exception          |
+| information_schema |
+| mysql              |
+| performance_schema |
+| restsampledatabase |
+| sakila             |
+| sql_hr             |
+| sql_invoicing      |
+| sql_store          |
+| storage            |
+| sys                |
+| templete           |
+| templetedata       |
+| testing            |
+| trail              |
+| users              |
+| world              |
++--------------------+
+17 rows in set (0.04 sec)
+
+mysql> show tables;
++------------------+
+| Tables_in_sql_hr |
++------------------+
+| employees        |
+| offices          |
++------------------+
+2 rows in set (0.03 sec)
+
+mysql> select * from offices;
++-----------+---------------------+---------------+-------+
+| office_id | address             | city          | state |
++-----------+---------------------+---------------+-------+
+|         1 | 03 Reinke Trail     | Cincinnati    | OH    |
+|         2 | 5507 Becker Terrace | New York City | NY    |
+|         3 | 54 Northland Court  | Richmond      | VA    |
+|         4 | 08 South Crossing   | Cincinnati    | OH    |
+|         5 | 553 Maple Drive     | Minneapolis   | MN    |
+|         6 | 23 North Plaza      | Aurora        | CO    |
+|         7 | 9658 Wayridge Court | Boise         | ID    |
+|         8 | 9 Grayhawk Trail    | New York City | NY    |
+|         9 | 16862 Westend Hill  | Knoxville     | TN    |
+|        10 | 4 Bluestem Parkway  | Savannah      | GA    |
++-----------+---------------------+---------------+-------+
+10 rows in set (0.00 sec)
+
+mysql> select * from employees;
++-------------+------------+------------+-----------------------------+--------+------------+-----------+
+| employee_id | first_name | last_name  | job_title                   | salary | reports_to | office_id |
++-------------+------------+------------+-----------------------------+--------+------------+-----------+
+|       33391 | D'arcy     | Nortunen   | Account Executive           |  62871 |      37270 |         1 |
+|       37270 | Yovonnda   | Magrannell | Executive Secretary         |  63996 |       NULL |        10 |
+|       37851 | Sayer      | Matterson  | Statistician III            |  98926 |      37270 |         1 |
+|       40448 | Mindy      | Crissil    | Staff Scientist             |  94860 |      37270 |         1 |
+|       56274 | Keriann    | Alloisi    | VP Marketing                | 110150 |      37270 |         1 |
+|       63196 | Alaster    | Scutchin   | Assistant Professor         |  32179 |      37270 |         2 |
+|       67009 | North      | de Clerc   | VP Product Management       | 114257 |      37270 |         2 |
+|       67370 | Elladine   | Rising     | Social Worker               |  96767 |      37270 |         2 |
+|       68249 | Nisse      | Voysey     | Financial Advisor           |  52832 |      37270 |         2 |
+|       72540 | Guthrey    | Iacopetti  | Office Assistant I          | 117690 |      37270 |         3 |
+|       72913 | Kass       | Hefferan   | Computer Systems Analyst IV |  96401 |      37270 |         3 |
+|       75900 | Virge      | Goodrum    | Information Systems Manager |  54578 |      37270 |         3 |
+|       76196 | Mirilla    | Janowski   | Cost Accountant             | 119241 |      37270 |         3 |
+|       80529 | Lynde      | Aronson    | Junior Executive            |  77182 |      37270 |         4 |
+|       80679 | Mildrid    | Sokale     | Geologist II                |  67987 |      37270 |         4 |
+|       84791 | Hazel      | Tarbert    | General Manager             |  93760 |      37270 |         4 |
+|       95213 | Cole       | Kesterton  | Pharmacist                  |  86119 |      37270 |         4 |
+|       96513 | Theresa    | Binney     | Food Chemist                |  47354 |      37270 |         5 |
+|       98374 | Estrellita | Daleman    | Staff Accountant IV         |  70187 |      37270 |         5 |
+|      115357 | Ivy        | Fearey     | Structural Engineer         |  92710 |      37270 |         5 |
++-------------+------------+------------+-----------------------------+--------+------------+-----------+
+20 rows in set (0.00 sec)
+
+mysql> delete from offices where office_id=10;
+Query OK, 1 row affected (0.06 sec)
+
+mysql> select * from employees;
++-------------+------------+-----------+-----------------------------+--------+------------+-----------+
+| employee_id | first_name | last_name | job_title                   | salary | reports_to | office_id |
++-------------+------------+-----------+-----------------------------+--------+------------+-----------+
+|       33391 | D'arcy     | Nortunen  | Account Executive           |  62871 |      37270 |         1 |
+|       37851 | Sayer      | Matterson | Statistician III            |  98926 |      37270 |         1 |
+|       40448 | Mindy      | Crissil   | Staff Scientist             |  94860 |      37270 |         1 |
+|       56274 | Keriann    | Alloisi   | VP Marketing                | 110150 |      37270 |         1 |
+|       63196 | Alaster    | Scutchin  | Assistant Professor         |  32179 |      37270 |         2 |
+|       67009 | North      | de Clerc  | VP Product Management       | 114257 |      37270 |         2 |
+|       67370 | Elladine   | Rising    | Social Worker               |  96767 |      37270 |         2 |
+|       68249 | Nisse      | Voysey    | Financial Advisor           |  52832 |      37270 |         2 |
+|       72540 | Guthrey    | Iacopetti | Office Assistant I          | 117690 |      37270 |         3 |
+|       72913 | Kass       | Hefferan  | Computer Systems Analyst IV |  96401 |      37270 |         3 |
+|       75900 | Virge      | Goodrum   | Information Systems Manager |  54578 |      37270 |         3 |
+|       76196 | Mirilla    | Janowski  | Cost Accountant             | 119241 |      37270 |         3 |
+|       80529 | Lynde      | Aronson   | Junior Executive            |  77182 |      37270 |         4 |
+|       80679 | Mildrid    | Sokale    | Geologist II                |  67987 |      37270 |         4 |
+|       84791 | Hazel      | Tarbert   | General Manager             |  93760 |      37270 |         4 |
+|       95213 | Cole       | Kesterton | Pharmacist                  |  86119 |      37270 |         4 |
+|       96513 | Theresa    | Binney    | Food Chemist                |  47354 |      37270 |         5 |
+|       98374 | Estrellita | Daleman   | Staff Accountant IV         |  70187 |      37270 |         5 |
+|      115357 | Ivy        | Fearey    | Structural Engineer         |  92710 |      37270 |         5 |
++-------------+------------+-----------+-----------------------------+--------+------------+-----------+
+19 rows in set (0.00 sec)
+
+mysql> select * from offices;
++-----------+---------------------+---------------+-------+
+| office_id | address             | city          | state |
++-----------+---------------------+---------------+-------+
+|         1 | 03 Reinke Trail     | Cincinnati    | OH    |
+|         2 | 5507 Becker Terrace | New York City | NY    |
+|         3 | 54 Northland Court  | Richmond      | VA    |
+|         4 | 08 South Crossing   | Cincinnati    | OH    |
+|         5 | 553 Maple Drive     | Minneapolis   | MN    |
+|         6 | 23 North Plaza      | Aurora        | CO    |
+|         7 | 9658 Wayridge Court | Boise         | ID    |
+|         8 | 9 Grayhawk Trail    | New York City | NY    |
+|         9 | 16862 Westend Hill  | Knoxville     | TN    |
++-----------+---------------------+---------------+-------+
+9 rows in set (0.00 sec)
+
+mysql> delete from offices where office_id=5;
+ERROR 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails (`sql_hr`.`employees`, CONSTRAINT `fk_employees_offices` FOREIGN KEY (`office_id`) REFERENCES `offices` (`office_id`) ON DELETE RESTRICT ON UPDATE RESTRICT)
+mysql> INSERT INTO `offices` VALUES (10,'4 Bluestem Parkway','Savannah','GA');
+Query OK, 1 row affected (0.08 sec)
+
+mysql> select * from offices;
++-----------+---------------------+---------------+-------+
+| office_id | address             | city          | state |
++-----------+---------------------+---------------+-------+
+|         1 | 03 Reinke Trail     | Cincinnati    | OH    |
+|         2 | 5507 Becker Terrace | New York City | NY    |
+|         3 | 54 Northland Court  | Richmond      | VA    |
+|         4 | 08 South Crossing   | Cincinnati    | OH    |
+|         5 | 553 Maple Drive     | Minneapolis   | MN    |
+|         6 | 23 North Plaza      | Aurora        | CO    |
+|         7 | 9658 Wayridge Court | Boise         | ID    |
+|         8 | 9 Grayhawk Trail    | New York City | NY    |
+|         9 | 16862 Westend Hill  | Knoxville     | TN    |
+|        10 | 4 Bluestem Parkway  | Savannah      | GA    |
++-----------+---------------------+---------------+-------+
+10 rows in set (0.00 sec)
+
+mysql> INSERT INTO `employees` VALUES (37270,'Yovonnda','Magrannell','Executive Secretary',63996,NULL,10);
+Query OK, 1 row affected (0.12 sec)
+
+mysql> select * from employees;
++-------------+------------+------------+-----------------------------+--------+------------+-----------+
+| employee_id | first_name | last_name  | job_title                   | salary | reports_to | office_id |
++-------------+------------+------------+-----------------------------+--------+------------+-----------+
+|       33391 | D'arcy     | Nortunen   | Account Executive           |  62871 |      37270 |         1 |
+|       37270 | Yovonnda   | Magrannell | Executive Secretary         |  63996 |       NULL |        10 |
+|       37851 | Sayer      | Matterson  | Statistician III            |  98926 |      37270 |         1 |
+|       40448 | Mindy      | Crissil    | Staff Scientist             |  94860 |      37270 |         1 |
+|       56274 | Keriann    | Alloisi    | VP Marketing                | 110150 |      37270 |         1 |
+|       63196 | Alaster    | Scutchin   | Assistant Professor         |  32179 |      37270 |         2 |
+|       67009 | North      | de Clerc   | VP Product Management       | 114257 |      37270 |         2 |
+|       67370 | Elladine   | Rising     | Social Worker               |  96767 |      37270 |         2 |
+|       68249 | Nisse      | Voysey     | Financial Advisor           |  52832 |      37270 |         2 |
+|       72540 | Guthrey    | Iacopetti  | Office Assistant I          | 117690 |      37270 |         3 |
+|       72913 | Kass       | Hefferan   | Computer Systems Analyst IV |  96401 |      37270 |         3 |
+|       75900 | Virge      | Goodrum    | Information Systems Manager |  54578 |      37270 |         3 |
+|       76196 | Mirilla    | Janowski   | Cost Accountant             | 119241 |      37270 |         3 |
+|       80529 | Lynde      | Aronson    | Junior Executive            |  77182 |      37270 |         4 |
+|       80679 | Mildrid    | Sokale     | Geologist II                |  67987 |      37270 |         4 |
+|       84791 | Hazel      | Tarbert    | General Manager             |  93760 |      37270 |         4 |
+|       95213 | Cole       | Kesterton  | Pharmacist                  |  86119 |      37270 |         4 |
+|       96513 | Theresa    | Binney     | Food Chemist                |  47354 |      37270 |         5 |
+|       98374 | Estrellita | Daleman    | Staff Accountant IV         |  70187 |      37270 |         5 |
+|      115357 | Ivy        | Fearey     | Structural Engineer         |  92710 |      37270 |         5 |
++-------------+------------+------------+-----------------------------+--------+------------+-----------+
+20 rows in set (0.00 sec)
+
+mysql> create database sql_inventory;
+Query OK, 1 row affected (0.15 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| exception          |
+| information_schema |
+| mysql              |
+| performance_schema |
+| restsampledatabase |
+| sakila             |
+| sql_hr             |
+| sql_inventory      |
+| sql_invoicing      |
+| sql_store          |
+| storage            |
+| sys                |
+| templete           |
+| templetedata       |
+| testing            |
+| trail              |
+| users              |
+| world              |
++--------------------+
+18 rows in set (0.00 sec)
+
+mysql> use sql_inventory;
+Database changed
+mysql> CREATE TABLE `products` (
+    ->
+    -> `product_id` int(11) NOT NULL AUTO_INCREMENT,
+    ->
+    -> `name` varchar(50) NOT NULL,
+    ->
+    -> `quantity_in_stock` int(11) NOT NULL,
+    ->
+    -> `unit_price` decimal(4,2) NOT NULL,
+    ->
+    -> PRIMARY KEY (`product_id`)
+    ->
+    -> ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+Query OK, 0 rows affected, 2 warnings (0.42 sec)
+
+mysql> INSERT INTO `products` VALUES (1,'Foam Dinner Plate',70,1.21);
+Query OK, 1 row affected (0.06 sec)
+
+mysql>
+mysql> INSERT INTO `products` VALUES (2,'Pork - Bacon,back Peameal',49,4.65);
+Query OK, 1 row affected (0.12 sec)
+
+mysql>
+mysql> INSERT INTO `products` VALUES (3,'Lettuce - Romaine, Heart',38,3.35);
+Query OK, 1 row affected (0.06 sec)
+
+mysql>
+mysql> INSERT INTO `products` VALUES (4,'Brocolinni - Gaylan, Chinese',90,4.53);
+Query OK, 1 row affected (0.07 sec)
+
+mysql>
+mysql> INSERT INTO `products` VALUES (5,'Sauce - Ranch Dressing',94,1.63);
+Query OK, 1 row affected (0.07 sec)
+
+mysql>
+mysql> INSERT INTO `products` VALUES (6,'Petit Baguette',14,2.39);
+Query OK, 1 row affected (0.09 sec)
+
+mysql>
+mysql> INSERT INTO `products` VALUES (7,'Sweet Pea Sprouts',98,3.29);
+Query OK, 1 row affected (0.05 sec)
+
+mysql>
+mysql> INSERT INTO `products` VALUES (8,'Island Oasis - Raspberry',26,0.74);
+Query OK, 1 row affected (0.09 sec)
+
+mysql>
+mysql> INSERT INTO `products` VALUES (9,'Longan',67,2.26);
+Query OK, 1 row affected (0.07 sec)
+
+mysql>
+mysql> INSERT INTO `products` VALUES (10,'Broom - Push',6,1.09);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> select * from products;
++------------+------------------------------+-------------------+------------+
+| product_id | name                         | quantity_in_stock | unit_price |
++------------+------------------------------+-------------------+------------+
+|          1 | Foam Dinner Plate            |                70 |       1.21 |
+|          2 | Pork - Bacon,back Peameal    |                49 |       4.65 |
+|          3 | Lettuce - Romaine, Heart     |                38 |       3.35 |
+|          4 | Brocolinni - Gaylan, Chinese |                90 |       4.53 |
+|          5 | Sauce - Ranch Dressing       |                94 |       1.63 |
+|          6 | Petit Baguette               |                14 |       2.39 |
+|          7 | Sweet Pea Sprouts            |                98 |       3.29 |
+|          8 | Island Oasis - Raspberry     |                26 |       0.74 |
+|          9 | Longan                       |                67 |       2.26 |
+|         10 | Broom - Push                 |                 6 |       1.09 |
++------------+------------------------------+-------------------+------------+
+10 rows in set (0.00 sec)
+
+mysql> show tables;
++-------------------------+
+| Tables_in_sql_inventory |
++-------------------------+
+| products                |
++-------------------------+
+1 row in set (0.00 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| exception          |
+| information_schema |
+| mysql              |
+| performance_schema |
+| restsampledatabase |
+| sakila             |
+| sql_hr             |
+| sql_inventory      |
+| sql_invoicing      |
+| sql_store          |
+| storage            |
+| sys                |
+| templete           |
+| templetedata       |
+| testing            |
+| trail              |
+| users              |
+| world              |
++--------------------+
+18 rows in set (0.00 sec)
+
+mysql> use storage;
+Database changed
+mysql> show tables;
++-------------------+
+| Tables_in_storage |
++-------------------+
+| department        |
+| emp               |
+| employee          |
+| job               |
+| students          |
++-------------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from emp;
++----+------+--------+-----------+--------+
+| id | name | mobile | email     | rollno |
++----+------+--------+-----------+--------+
+|  1 | vbv  |  99774 | nag@13gmq |   NULL |
++----+------+--------+-----------+--------+
+1 row in set (0.06 sec)
+
+mysql> drop table emp;
+Query OK, 0 rows affected (0.40 sec)
+
+mysql> show tables;
++-------------------+
+| Tables_in_storage |
++-------------------+
+| department        |
+| employee          |
+| job               |
+| students          |
++-------------------+
+4 rows in set (0.02 sec)
+
+mysql> desc employee;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| EmpNo      | int(3)      | NO   | PRI | NULL    |       |
+| EName      | varchar(35) | NO   |     | NULL    |       |
+| jCode      | int(3)      | YES  |     | NULL    |       |
+| MgrNo      | int(3)      | YES  |     | NULL    |       |
+| HireDate   | date        | YES  |     | NULL    |       |
+| Salary     | int(10)     | YES  |     | NULL    |       |
+| Commission | float(11,2) | YES  |     | NULL    |       |
+| DeptNo     | int(3)      | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> select * from employee;
++-------+----------+-------+-------+------------+---------+------------+--------+
+| EmpNo | EName    | jCode | MgrNo | HireDate   | Salary  | Commission | DeptNo |
++-------+----------+-------+-------+------------+---------+------------+--------+
+|     1 | venkat   |   672 |  NULL | 2006-02-01 | 1200000 |   10000.00 |     40 |
+|     2 | Nirmala  |   671 |     1 | 2007-04-02 |  800000 |   50000.00 |     20 |
+|     3 | Pradeep  |   669 |     1 | 2005-10-10 | 1000000 |       NULL |     40 |
+|     4 | Srinivas |   669 |     1 | 2005-05-08 | 1000000 |       NULL |     30 |
+|     5 | Krishna  |   668 |     2 | 2005-10-09 |  500000 |   20000.00 |     22 |
+|     6 | Deepa    |   668 |     3 | 2007-09-09 |  600000 |       NULL |     23 |
+|     7 | Keerthi  |   668 |     4 | 2006-06-05 |  600000 |       NULL |     24 |
++-------+----------+-------+-------+------------+---------+------------+--------+
+7 rows in set (0.03 sec)
+
+mysql> alter table employee add Age int(10);
+Query OK, 0 rows affected, 1 warning (0.75 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+mysql> select * from employee;
++-------+----------+-------+-------+------------+---------+------------+--------+------+
+| EmpNo | EName    | jCode | MgrNo | HireDate   | Salary  | Commission | DeptNo | Age  |
++-------+----------+-------+-------+------------+---------+------------+--------+------+
+|     1 | venkat   |   672 |  NULL | 2006-02-01 | 1200000 |   10000.00 |     40 | NULL |
+|     2 | Nirmala  |   671 |     1 | 2007-04-02 |  800000 |   50000.00 |     20 | NULL |
+|     3 | Pradeep  |   669 |     1 | 2005-10-10 | 1000000 |       NULL |     40 | NULL |
+|     4 | Srinivas |   669 |     1 | 2005-05-08 | 1000000 |       NULL |     30 | NULL |
+|     5 | Krishna  |   668 |     2 | 2005-10-09 |  500000 |   20000.00 |     22 | NULL |
+|     6 | Deepa    |   668 |     3 | 2007-09-09 |  600000 |       NULL |     23 | NULL |
+|     7 | Keerthi  |   668 |     4 | 2006-06-05 |  600000 |       NULL |     24 | NULL |
++-------+----------+-------+-------+------------+---------+------------+--------+------+
+7 rows in set (0.00 sec)
+
+mysql> alter table employee modify Age int(10) not null;
+ERROR 1138 (22004): Invalid use of NULL value
+mysql> alter table drop age;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'drop age' at line 1
+mysql> alter table employee drop Age int(10);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'int(10)' at line 1
+mysql> alter table employee drop Age;
+Query OK, 0 rows affected (1.17 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from employee;
++-------+----------+-------+-------+------------+---------+------------+--------+
+| EmpNo | EName    | jCode | MgrNo | HireDate   | Salary  | Commission | DeptNo |
++-------+----------+-------+-------+------------+---------+------------+--------+
+|     1 | venkat   |   672 |  NULL | 2006-02-01 | 1200000 |   10000.00 |     40 |
+|     2 | Nirmala  |   671 |     1 | 2007-04-02 |  800000 |   50000.00 |     20 |
+|     3 | Pradeep  |   669 |     1 | 2005-10-10 | 1000000 |       NULL |     40 |
+|     4 | Srinivas |   669 |     1 | 2005-05-08 | 1000000 |       NULL |     30 |
+|     5 | Krishna  |   668 |     2 | 2005-10-09 |  500000 |   20000.00 |     22 |
+|     6 | Deepa    |   668 |     3 | 2007-09-09 |  600000 |       NULL |     23 |
+|     7 | Keerthi  |   668 |     4 | 2006-06-05 |  600000 |       NULL |     24 |
++-------+----------+-------+-------+------------+---------+------------+--------+
+7 rows in set (0.00 sec)
+
+mysql> alter table employee add Age int(10) not null;
+Query OK, 0 rows affected, 1 warning (0.29 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+mysql> select * from employee;
++-------+----------+-------+-------+------------+---------+------------+--------+-----+
+| EmpNo | EName    | jCode | MgrNo | HireDate   | Salary  | Commission | DeptNo | Age |
++-------+----------+-------+-------+------------+---------+------------+--------+-----+
+|     1 | venkat   |   672 |  NULL | 2006-02-01 | 1200000 |   10000.00 |     40 |   0 |
+|     2 | Nirmala  |   671 |     1 | 2007-04-02 |  800000 |   50000.00 |     20 |   0 |
+|     3 | Pradeep  |   669 |     1 | 2005-10-10 | 1000000 |       NULL |     40 |   0 |
+|     4 | Srinivas |   669 |     1 | 2005-05-08 | 1000000 |       NULL |     30 |   0 |
+|     5 | Krishna  |   668 |     2 | 2005-10-09 |  500000 |   20000.00 |     22 |   0 |
+|     6 | Deepa    |   668 |     3 | 2007-09-09 |  600000 |       NULL |     23 |   0 |
+|     7 | Keerthi  |   668 |     4 | 2006-06-05 |  600000 |       NULL |     24 |   0 |
++-------+----------+-------+-------+------------+---------+------------+--------+-----+
+7 rows in set (0.00 sec)
+
+mysql> alter table employee modify Age check(Age>=25);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'check(Age>=25)' at line 1
+mysql> alter table employee modify Age int (10) check(Age>=25);
+Query OK, 0 rows affected, 1 warning (0.95 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+mysql> insert into employee(age) values(26) where empno=1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where empno=1' at line 1
+mysql> insert into employee(age) values(26) where EmpNo=1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where EmpNo=1' at line 1
+mysql> insert into employee(Age) values(26) where empno=1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where empno=1' at line 1
+mysql> insert into employee(Age) values(26);
+ERROR 1364 (HY000): Field 'EmpNo' doesn't have a default value
+mysql> insert into employee(8,"hello",Age) values(26);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '8,"hello",Age) values(26)' at line 1
+mysql> insert into employee(empno,ename,Age) values(8,"hello"26);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '26)' at line 1
+mysql> insert into employee(empno,ename,Age) values(8,"hello",26);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> select * from employee;
++-------+----------+-------+-------+------------+---------+------------+--------+------+
+| EmpNo | EName    | jCode | MgrNo | HireDate   | Salary  | Commission | DeptNo | Age  |
++-------+----------+-------+-------+------------+---------+------------+--------+------+
+|     1 | venkat   |   672 |  NULL | 2006-02-01 | 1200000 |   10000.00 |     40 |    0 |
+|     2 | Nirmala  |   671 |     1 | 2007-04-02 |  800000 |   50000.00 |     20 |    0 |
+|     3 | Pradeep  |   669 |     1 | 2005-10-10 | 1000000 |       NULL |     40 |    0 |
+|     4 | Srinivas |   669 |     1 | 2005-05-08 | 1000000 |       NULL |     30 |    0 |
+|     5 | Krishna  |   668 |     2 | 2005-10-09 |  500000 |   20000.00 |     22 |    0 |
+|     6 | Deepa    |   668 |     3 | 2007-09-09 |  600000 |       NULL |     23 |    0 |
+|     7 | Keerthi  |   668 |     4 | 2006-06-05 |  600000 |       NULL |     24 |    0 |
+|     8 | hello    |  NULL |  NULL | NULL       |    NULL |       NULL |   NULL |   26 |
++-------+----------+-------+-------+------------+---------+------------+--------+------+
+8 rows in set (0.00 sec)
+
+mysql> insert into employee(empno,ename,Age) values(9,"hello11",24);
+Query OK, 1 row affected (0.13 sec)
+
+mysql> select * from employee;
++-------+----------+-------+-------+------------+---------+------------+--------+------+
+| EmpNo | EName    | jCode | MgrNo | HireDate   | Salary  | Commission | DeptNo | Age  |
++-------+----------+-------+-------+------------+---------+------------+--------+------+
+|     1 | venkat   |   672 |  NULL | 2006-02-01 | 1200000 |   10000.00 |     40 |    0 |
+|     2 | Nirmala  |   671 |     1 | 2007-04-02 |  800000 |   50000.00 |     20 |    0 |
+|     3 | Pradeep  |   669 |     1 | 2005-10-10 | 1000000 |       NULL |     40 |    0 |
+|     4 | Srinivas |   669 |     1 | 2005-05-08 | 1000000 |       NULL |     30 |    0 |
+|     5 | Krishna  |   668 |     2 | 2005-10-09 |  500000 |   20000.00 |     22 |    0 |
+|     6 | Deepa    |   668 |     3 | 2007-09-09 |  600000 |       NULL |     23 |    0 |
+|     7 | Keerthi  |   668 |     4 | 2006-06-05 |  600000 |       NULL |     24 |    0 |
+|     8 | hello    |  NULL |  NULL | NULL       |    NULL |       NULL |   NULL |   26 |
+|     9 | hello11  |  NULL |  NULL | NULL       |    NULL |       NULL |   NULL |   24 |
++-------+----------+-------+-------+------------+---------+------------+--------+------+
+9 rows in set (0.00 sec)
+
+mysql> savepoint first;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> insert into employee(empno,ename,Age) values(12,"hellwewo11",24);
+Query OK, 1 row affected (0.14 sec)
+
+mysql> select * from employee;
++-------+------------+-------+-------+------------+---------+------------+--------+------+
+| EmpNo | EName      | jCode | MgrNo | HireDate   | Salary  | Commission | DeptNo | Age  |
++-------+------------+-------+-------+------------+---------+------------+--------+------+
+|     1 | venkat     |   672 |  NULL | 2006-02-01 | 1200000 |   10000.00 |     40 |    0 |
+|     2 | Nirmala    |   671 |     1 | 2007-04-02 |  800000 |   50000.00 |     20 |    0 |
+|     3 | Pradeep    |   669 |     1 | 2005-10-10 | 1000000 |       NULL |     40 |    0 |
+|     4 | Srinivas   |   669 |     1 | 2005-05-08 | 1000000 |       NULL |     30 |    0 |
+|     5 | Krishna    |   668 |     2 | 2005-10-09 |  500000 |   20000.00 |     22 |    0 |
+|     6 | Deepa      |   668 |     3 | 2007-09-09 |  600000 |       NULL |     23 |    0 |
+|     7 | Keerthi    |   668 |     4 | 2006-06-05 |  600000 |       NULL |     24 |    0 |
+|     8 | hello      |  NULL |  NULL | NULL       |    NULL |       NULL |   NULL |   26 |
+|     9 | hello11    |  NULL |  NULL | NULL       |    NULL |       NULL |   NULL |   24 |
+|    10 | world      |  NULL |  NULL | NULL       |    NULL |       NULL |   NULL | NULL |
+|    11 | helloworld |  NULL |  NULL | NULL       |    NULL |       NULL |   NULL | NULL |
+|    12 | hellwewo11 |  NULL |  NULL | NULL       |    NULL |       NULL |   NULL |   24 |
++-------+------------+-------+-------+------------+---------+------------+--------+------+
+12 rows in set (0.00 sec)
+
+mysql> rollback to first;
+ERROR 1305 (42000): SAVEPOINT first does not exist
+mysql>
